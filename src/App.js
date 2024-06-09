@@ -1,11 +1,12 @@
 import './App.css';
+import Navbar from './components/Navbar';
 
 const App = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <h3>پروژه مدیریت مخاطبین</h3>
-        
+        <Navbar />
+
       </header>
     </div>
   );
