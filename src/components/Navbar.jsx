@@ -1,21 +1,27 @@
-import { PURPLE } from "../helpers/colors"
-import SearchContact from "./contact/SearchContact"
+import { FOREGROUND, PURPLE } from "../helpers/colors"
+import SearchContact from "./contacts/SearchContact"
 import { FaAddressBook } from "react-icons/fa6";
 
 const Navbar = () => {
     return (
-        <nav className="navbar navbar-dark navbar-expand-sm shadow-lg ">
-            <div className="container  justify-content-center w-100">
-                <div className="row w-75">
-                    <div className="col">
-                        <FaAddressBook />
-                        وب اپلیکیشن مدیریت{' '}
-                        <span style={{ color: PURPLE }}>مخاطبین</span>
+        <header className="App-header">
+            <nav className="navbar navbar-dark navbar-expand-sm shadow-lg ">
+                <div className="container justify-content-center">
+                    <div className="row w-75">
+                        <div className="col-sm-12 col-md-6  my-2 " style={{ color: FOREGROUND, fontSize: '20px' }}>
+                            <FaAddressBook style={{ color: PURPLE, fontSize: '22px' }} />
+                            {'  '}وب اپلیکیشن مدیریت{'  '}
+                            <span style={{ color: PURPLE }}>مخاطبین</span>
+                        </div>
+                        <div className="col-sm-12 col-md-6 ">
+                            <SearchContact />
+                        </div>
+
                     </div>
-                    <SearchContact />
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </header>
+
     )
 }
 export default Navbar

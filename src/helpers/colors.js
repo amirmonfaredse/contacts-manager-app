@@ -1,6 +1,6 @@
 
 export const BACKGROUND = '#282A36'
-export const CurrentLine ='#44475A'
+export const CURRENTLINE ='#44475A'
 export const FOREGROUND ='#F8F8F2'
 export const COMMENT ='#6272A4'
 export const CYAN = '#8BE9FD'
