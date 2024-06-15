@@ -1,6 +1,6 @@
 import { CURRENTLINE, GREEN, PINK } from "../../helpers/colors";
 import Spinner from "../Spinner";
-import { serviceGetContact, serviceGetGroup } from "../../services/contactService";
+import { serveGetContact, serveGetGroup } from "../../services/contactService";
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 const ViewContact = () => {
@@ -12,8 +12,8 @@ const ViewContact = () => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const { data: contactData } = await serviceGetContact(contactId);
-                const { data: groupData } = await serviceGetGroup(contactData.group);
+                const { data: contactData } = await serveGetContact(contactId);
+                const { data: groupData } = await serveGetGroup(contactData.group);
                 setContact(contactData);
                 setGroup(groupData)
                 setLoading(false)

@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background-color: #282a36;
   font-family: "Vazir", "tahoma", "Ubuntu", "sans-serif" !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -13,7 +14,7 @@ body {
 input[type="text"]::-webkit-input-placeholder,
 input[type="email"]::-webkit-input-placeholder,
 input[type="number"]::-webkit-input-placeholder {
-  color:#BD93F9 !important;
+  color: #bd93f9 !important;
 }
 
 input[type="text"]:focus {

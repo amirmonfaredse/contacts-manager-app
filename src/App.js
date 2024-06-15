@@ -2,11 +2,11 @@ import { BACKGROUND, COMMENT, CURRENTLINE, FOREGROUND, PURPLE, YELLOW } from './
 import { useState, useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
+import { ContactContext } from './context/contactContext';
 // Contact Components
 import {
   AddContact,
   Contacts,
-  Contact,
   EditContact,
   Navbar,
   ViewContact
@@ -16,26 +16,30 @@ import {
 import './App.css';
 
 // Services
-import { serviceCreateContact, serviceDeleteContact, serviceGetAllContacts, serviceGetAllGroups } from "./services/contactService"
+import {
+  serveCreateContact,
+  serveDeleteContact,
+  serveGetAllContacts,
+  serveGetAllGroups
+} from "./services/contactService"
 
 
 const App = () => {
   const navigate = useNavigate()
-  const [forceRender, setForceRender] = useState(false)
   // Contacts States
-  const [contacts, setContacts] = useState([])
   const [contact, setContact] = useState({})
+  const [contacts, setContacts] = useState([])
   const [filteredContacts, setFilteredContacts] = useState([])
   const [groups, setGroups] = useState([])
   const [loading, setLoading] = useState(false)
-  const [query, setQuery] = useState({ text: '' })
+  const [contactQuery, setContactQuery] = useState({ text: "" })
   // Services
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true)
-        const { data: allContactsData } = await serviceGetAllContacts()
-        const { data: allGroupsData } = await serviceGetAllGroups()
+        const { data: allContactsData } = await serveGetAllContacts()
+        const { data: allGroupsData } = await serveGetAllGroups()
 
         setContacts(allContactsData);
         setFilteredContacts(allContactsData)
@@ -50,48 +54,39 @@ const App = () => {
 
     fetchData()
   }, [])
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true)
-        const { data: allContactsData } = await serviceGetAllContacts()
 
-        setContacts(allContactsData);
-
-        setLoading(false)
-      } catch (err) {
-        console.log(err.message);
-        setLoading(false)
-      }
-    }
-    fetchData()
-  }, [forceRender])
-
-  const handlerSetContactInfo = (e) => {
+  // Handlers
+  const onInputChange = (e) => {
     setContact({
       ...contact,
       [e.target.name]: e.target.value
     });
   }
-  const handlerSubmitForm = async (e) => {
+  const onSubmitForm = async (e) => {
     e.preventDefault()
     try {
-      const { status } = await serviceCreateContact(contact);
+      const { status, data } = await serveCreateContact(contact);
       if (status === 201) {
+        setLoading(true);
+        const allContacts = [...contacts, data];
+        setContacts(allContacts)
+        setFilteredContacts(allContacts)
         setContact({});
-        setForceRender(!forceRender)
+        setLoading(false)
         navigate('/contacts')
       }
     } catch (err) {
       console.log(err.message);
+      setLoading(false);
+
     }
   }
-  const handlerRemoveContact = async (contactId) => {
+  const onDeleteContact = async (contactId) => {
     try {
       setLoading(true)
-      const response = await serviceDeleteContact(contactId);
+      const response = await serveDeleteContact(contactId);
       if (response) {
-        const { data: contactsData } = await serviceGetAllContacts()
+        const { data: contactsData } = await serveGetAllContacts()
         setContacts(contactsData)
       }
       setLoading(false)
@@ -118,7 +113,7 @@ const App = () => {
               className='btn mx-2'
               style={{ backgroundColor: PURPLE }}
               onClick={() => {
-                handlerRemoveContact(contactId);
+                onDeleteContact(contactId);
                 onClose()
               }}>مطمئن هستم
             </button>
@@ -135,32 +130,42 @@ const App = () => {
     })
   }
   const contactSearch = (e) => {
-    setQuery({ ...query, text: e.target.value });
+    setContactQuery({ ...contactQuery, text: e.target.value });
     const allContacts = contacts.filter((c) => {
-      return c.fullName.includes(e.target.value.toLowerCase())
+      return c.fullName.toLowerCase().includes(e.target.value.toLowerCase())
     })
+    console.log(allContacts)
     setFilteredContacts(allContacts)
   }
   return (
-    <div className="App" style={{ backgroundColor: BACKGROUND }}>
-      <Navbar query={query} search={contactSearch} />
-      <Routes>
-        <Route path='/' element={<Navigate to="/contacts" />} />
-        <Route path='/contacts' element={<Contacts
-          contacts={filteredContacts}
-          loading={loading}
-          confirmDelete={confirmDeleteContact}
-        />} />
-        <Route path='/contacts/add' element={<AddContact
-          loading={loading}
-          contact={contact}
-          groups={groups}
-          handlerSetContactInfo={handlerSetContactInfo}
-          handlerSubmitForm={handlerSubmitForm} />} />
-        <Route path='/contacts/edit/:contactId' element={<EditContact />} />
-        <Route path='/contacts/:contactId' element={<ViewContact />} />
-      </Routes>
-    </div>
+    <ContactContext.Provider value={{
+      loading,
+      setLoading,
+      contact,
+      setContact,
+      contacts,
+      setContacts,
+      contactQuery,
+      filteredContacts,
+      setFilteredContacts,
+      groups,
+      onInputChange,
+      onSubmitForm,
+      confirmDeleteContact,
+      contactSearch
+    }}>
+      <div className="App" style={{ backgroundColor: BACKGROUND }}>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Navigate to="/contacts" />} />
+          <Route path='/contacts' element={<Contacts />} />
+          <Route path='/contacts/add' element={<AddContact />} />
+          <Route path='/contacts/edit/:contactId' element={<EditContact />} />
+          <Route path='/contacts/:contactId' element={<ViewContact />} />
+        </Routes>
+      </div>
+    </ContactContext.Provider>
+
   );
 }
 

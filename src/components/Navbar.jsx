@@ -1,10 +1,12 @@
+
 import { useLocation } from "react-router-dom";
 import { FOREGROUND, PURPLE } from "../helpers/colors"
 import SearchContact from "./contacts/SearchContact"
 import { FaAddressBook } from "react-icons/fa6";
 
-const Navbar = ({ query, search }) => {
+const Navbar = () => {
     const location = useLocation()
+    
     return (
         <header className="App-header">
             <nav className="navbar navbar-dark navbar-expand-sm shadow-lg ">
@@ -18,7 +20,7 @@ const Navbar = ({ query, search }) => {
                         <div className="col-sm-12 col-md-6 ">
                             {
                                 location.pathname === "/contacts" ? (
-                                    <SearchContact query={query} search={search} />
+                                    <SearchContact />
 
                                 ) : null
                             }

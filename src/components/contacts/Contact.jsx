@@ -4,7 +4,6 @@ import { FaPen, FaRegEye } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 
-
 const Contact = ({ contact, confirmDelete }) => {
     return (
         <div className="col-md-6">
