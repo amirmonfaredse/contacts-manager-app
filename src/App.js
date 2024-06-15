@@ -1,7 +1,6 @@
 import { BACKGROUND, COMMENT, CURRENTLINE, FOREGROUND, PURPLE, YELLOW } from './helpers/colors';
 import { useState, useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
-import { confirmAlert } from 'react-confirm-alert';
 import { ContactContext } from './context/contactContext';
 // Contact Components
 import {
@@ -22,7 +21,13 @@ import {
   serveGetAllContacts,
   serveGetAllGroups
 } from "./services/contactService"
-
+// Import Handlers
+import {
+  onSubmitForm,
+  onInputChange,
+  onDeleteContact,
+  confirmDeleteContact, contactSearch
+} from "./handlers"
 
 const App = () => {
   const navigate = useNavigate()
@@ -55,88 +60,7 @@ const App = () => {
     fetchData()
   }, [])
 
-  // Handlers
-  const onInputChange = (e) => {
-    setContact({
-      ...contact,
-      [e.target.name]: e.target.value
-    });
-  }
-  const onSubmitForm = async (e) => {
-    e.preventDefault()
-    try {
-      const { status, data } = await serveCreateContact(contact);
-      if (status === 201) {
-        setLoading(true);
-        const allContacts = [...contacts, data];
-        setContacts(allContacts)
-        setFilteredContacts(allContacts)
-        setContact({});
-        setLoading(false)
-        navigate('/contacts')
-      }
-    } catch (err) {
-      console.log(err.message);
-      setLoading(false);
 
-    }
-  }
-  const onDeleteContact = async (contactId) => {
-    try {
-      setLoading(true)
-      const response = await serveDeleteContact(contactId);
-      if (response) {
-        const { data: contactsData } = await serveGetAllContacts()
-        setContacts(contactsData)
-      }
-      setLoading(false)
-    }
-    catch (err) {
-      console.log(err.message);
-      setLoading(false);
-    }
-  }
-  const confirmDeleteContact = (contactId, contactFullname) => {
-    confirmAlert({
-      customUI: ({ onClose }) => {
-        return (
-          <div
-            dir='rtl'
-            style={{ backgroundColor: CURRENTLINE, border: `1px solid ${PURPLE}`, borderRadius: "1rem" }}
-            className='p-4'
-          >
-            <h1 style={{ color: YELLOW }}>پاک کردن مخاطب</h1>
-            <p style={{ color: FOREGROUND }}>
-              آیا از پاک کردن مخاطب {contactFullname} اطمینان دارید؟
-            </p>
-            <button
-              className='btn mx-2'
-              style={{ backgroundColor: PURPLE }}
-              onClick={() => {
-                onDeleteContact(contactId);
-                onClose()
-              }}>مطمئن هستم
-            </button>
-            <button onClick={onClose}
-              className='btn'
-              style={{ backgroundColor: COMMENT }}
-            >
-              انصراف
-            </button>
-          </div>
-
-        )
-      }
-    })
-  }
-  const contactSearch = (e) => {
-    setContactQuery({ ...contactQuery, text: e.target.value });
-    const allContacts = contacts.filter((c) => {
-      return c.fullName.toLowerCase().includes(e.target.value.toLowerCase())
-    })
-    console.log(allContacts)
-    setFilteredContacts(allContacts)
-  }
   return (
     <ContactContext.Provider value={{
       loading,
@@ -149,10 +73,28 @@ const App = () => {
       filteredContacts,
       setFilteredContacts,
       groups,
-      onInputChange,
-      onSubmitForm,
-      confirmDeleteContact,
-      contactSearch
+      onInputChange: (e) => {
+        return onInputChange(e, contact, setContact);
+      },
+      onSubmitForm: (e) => {
+        return onSubmitForm(e,
+          contact,
+          contacts,
+          setContact,
+          setContacts,
+          setFilteredContacts,
+          navigate,
+          setLoading,)
+      },
+      onDeleteContact: (contactId) => {
+        return onDeleteContact(contactId, setLoading, setContacts)
+      },
+      confirmDeleteContact: (contactId, contactFullname) => {
+        return confirmDeleteContact(contactId, contactFullname, (id) => onDeleteContact(id, setContact, setLoading))
+      },
+      contactSearch: (e) => {
+        return contactSearch(e, contacts, contactQuery, setContactQuery, setFilteredContacts);
+      }
     }}>
       <div className="App" style={{ backgroundColor: BACKGROUND }}>
         <Navbar />
@@ -164,7 +106,7 @@ const App = () => {
           <Route path='/contacts/:contactId' element={<ViewContact />} />
         </Routes>
       </div>
-    </ContactContext.Provider>
+    </ContactContext.Provider >
 
   );
 }

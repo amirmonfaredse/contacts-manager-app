@@ -4,11 +4,7 @@ import { useContext } from "react";
 import { ContactContext } from "../../context/contactContext";
 import Spinner from "../Spinner";
 const AddContact = () => {
-    const { loading,
-        onSubmitForm,
-        onInputChange,
-        contact,
-        groups } = useContext(ContactContext)
+    const { loading, onSubmitForm, onInputChange, contact, groups } = useContext(ContactContext);
     return (
         <>
             {loading ? <Spinner /> : (
@@ -56,7 +52,7 @@ const AddContact = () => {
                                     />
                                     <input type="file"
                                         value={contact.image}
-                                        onChange={onInputChange}
+                                        // onChange={onInputChange}
                                         name="image"
                                         placeholder="ادرس ایمیل ..."
                                         className="form-control inp-main my-2"
