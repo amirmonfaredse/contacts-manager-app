@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 
 
-const Contact = ({ contact }) => {
+const Contact = ({ contact, confirmDelete }) => {
     return (
         <div className="col-md-6">
-            <div className="card mx-2" style={{ backgroundColor: CURRENTLINE }}>
+            <div className="card m-2" style={{ backgroundColor: CURRENTLINE }}>
                 <div className="card-body px-3">
                     <div className="row align-items-center d-flex justify-content-around">
                         <div className="col-md-4 col-sm-4">
@@ -41,10 +41,10 @@ const Contact = ({ contact }) => {
                             <Link to={`/contacts/${contact.id}`} className="btn my-1" style={{ backgroundColor: ORANGE }}>
                                 <FaRegEye />
                             </Link>
-                            <button className="btn my-1" style={{ backgroundColor: CYAN }}>
+                            <Link to={`/contacts/edit/${contact.id}`} className="btn my-1" style={{ backgroundColor: CYAN }}>
                                 <FaPen />
-                            </button>
-                            <button className="btn my-1" style={{ backgroundColor: RED }}>
+                            </Link>
+                            <button onClick={confirmDelete} className="btn my-1" style={{ backgroundColor: RED }}>
                                 <TbTrashFilled />
                             </button>
                         </div>

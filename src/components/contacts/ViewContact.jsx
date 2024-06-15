@@ -1,14 +1,13 @@
-import { CURRENTLINE, GREEN } from "../../helpers/colors";
+import { CURRENTLINE, GREEN, PINK } from "../../helpers/colors";
 import Spinner from "../Spinner";
 import { serviceGetContact, serviceGetGroup } from "../../services/contactService";
-import { Link, useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 const ViewContact = () => {
     const { contactId } = useParams()
-    console.log(contactId)
-    const { loading, setLoading } = useState(false);
-    const { contact, setContact } = useState({})
-    const { group, setGroup } = useState({})
+    const [loading, setLoading] = useState(false);
+    const [contact, setContact] = useState({})
+    const [group, setGroup] = useState({})
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -35,52 +34,59 @@ const ViewContact = () => {
                             اطلاعات مخاطب
                         </h3>
                     </div>
+
+                    {loading ? <Spinner /> : (
+                        <>
+                            {Object.keys(contact).length > 0 && (
+                                <div className="grid">
+                                    <div className="row my-3">
+                                        <div className="col d-flex pe-0" style={{ backgroundColor: CURRENTLINE }}>
+                                            <div className="w-25">
+                                                <img className="img-fluid" src={require("../../assets/profiles/AmirrezaMonfared.jpg")} alt='تصویرمخاطب' />
+                                            </div>
+                                            <div className="w-75  my-5">
+                                                <ul className="list-group">
+                                                    <li className="list-group-item">
+                                                        نام و نام خانوادگی :
+                                                        <span className="fw-bold">
+                                                            {contact.fullName}
+                                                        </span>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        شماره تلفن :
+                                                        <span className="fw-bold">
+                                                            {contact.phoneNumber}
+                                                        </span>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        ایمیل :
+                                                        <span className="fw-bold">
+                                                            {contact.email}
+                                                        </span>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        شغل :
+                                                        <span className="fw-bold">
+                                                            {contact.profession}
+                                                        </span>
+                                                    </li>
+                                                    <li className="list-group-item">
+                                                        نام و نام خانوادگی :
+                                                        <span className="fw-bold">
+                                                            {contact.fullName}
+                                                        </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <Link to={"/contacts"} className="btn w-25 mt-3" style={{ backgroundColor: PINK }}>بازگشت به صفحه اصلی</Link>
+                                </div>
+                            )}
+                        </>
+                    )
+                    }
                 </div>
-                {loading ? <Spinner /> : (
-                    <div className="grid">
-                        <div className="row my-3">
-                            <div className="col" style={{ backgroundColor: CURRENTLINE }}>
-                                <div className="img-box">
-                                    <img src={require("../../assets/profiles/AmirrezaMonfared.jpg")} alt={`تصویر مخاطب ${contact.fullName}`} />
-                                </div>
-                                <div className="info-box">
-                                    <ul className="list-group">
-                                        <li className="list-group-item">
-                                            نام و نام خانوادگی :
-                                            <span className="fw-bold">
-                                                {contact.fullName}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item">
-                                            شماره تلفن :
-                                            <span className="fw-bold">
-                                                {contact.phoneNumber}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item">
-                                            ایمیل :
-                                            <span className="fw-bold">
-                                                {contact.email}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item">
-                                            شغل :
-                                            <span className="fw-bold">
-                                                {contact.profession}
-                                            </span>
-                                        </li>
-                                        <li className="list-group-item">
-                                            نام و نام خانوادگی :
-                                            <span className="fw-bold">
-                                                {contact.fullName}
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
             </section>
         </>
     )

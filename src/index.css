@@ -29,3 +29,9 @@ input[type="number"]:focus {
   box-shadow: none !important;
 }
 
+.inp-main {
+  background-color: #282a36 !important;
+  border-color: #bd93f9 !important;
+  color: #bd93f9 !important;
+  width: 50% !important;
+}
