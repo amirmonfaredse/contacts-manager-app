@@ -1,119 +1,122 @@
 import { Link } from "react-router-dom";
-import { COMMENT, CURRENTLINE, GREEN, PURPLE, RED } from "../../helpers/colors";
+import { COMMENT, CURRENTLINE, CYAN, GREEN, ORANGE, PURPLE, RED, YELLOW } from "../../helpers/colors";
 import { useContext } from "react";
 import { ContactContext } from "../../context/contactContext";
 import Spinner from "../Spinner";
 
 
 // Form Validation 
-import { useFormik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { contactSchema } from '../../validation/contactValidation'
 const AddContact = () => {
-    const { loading, onSubmitForm, onInputChange, contact, groups } = useContext(ContactContext);
-    const formik = useFormik({
-        initialValues: {
-            fullName: '',
-            // image: null,
-            phoneNumber: '',
-            profession: '',
-            email: '',
-            group: '',
+    const { loading, onSubmitForm, groups } = useContext(ContactContext);
 
-        },
-        validationSchema: contactSchema,
-        onSubmit: (values) => {
-            onSubmitForm(values)
-        }
-
-    })
     return (
         <>
             {loading ? <Spinner /> : (
                 <div className="container" >
                     <div className="grid">
-                        <div className="row my-5 text-center">
+                        <div className="row  text-center">
                             <div className="col rounded" >
-                                <h3 className="h3" style={{ color: GREEN }}>
+                                <h3 className="h3 p-3" style={{ color: GREEN }}>
                                     ساخت مخاطب جدید
                                 </h3>
-                                <form
-                                    onSubmit={formik.handleSubmit}
-                                    className="m-5 p-4 d-flex justify-content-start flex-column" style={{ backgroundColor: CURRENTLINE }}>
-                                    <input type="text"
-                                        name="fullName"
-                                        id="fullName"
-                                        value={formik.values.fullName}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        placeholder="نام و نام خانوادگی ..."
-                                        className="form-control inp-main my-2"
-                                    />
-                                    {formik.touched.fullName && formik.errors.fullName ? (<span className="text-end" style={{ color: RED, fontSize: 14 }}>{formik.errors.fullName}</span>) : null}
-                                    <input type="number"
-                                        id="phoneNumber"
-                                        name="phoneNumber"
-                                        value={formik.values.phoneNumber}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        placeholder="شماره تماس ..."
-                                        className="form-control inp-main my-2"
-                                    />
-                                    {formik.touched.phoneNumber && formik.errors.phoneNumber ? (<span className="text-end" style={{ color: RED, fontSize: 14 }}>{formik.errors.phoneNumber}</span>) : null}
+                                <div className="container d-flex" style={{ backgroundColor: CURRENTLINE, borderRadius: 10 }}
+                                >
+                                    <div className="col-12 col-sm-12 col-md-6 col-xl-6">
+                                        <Formik
+                                            initialValues={{
+                                                fullName: '',
+                                                // image: null,
+                                                phoneNumber: '',
+                                                profession: '',
+                                                email: '',
+                                                group: '',
 
-                                    <input type="email"
-                                        name="email"
-                                        id="email"
-                                        value={formik.values.email}
-                                        onChange={formik.handleChange}
-                                        placeholder="ادرس ایمیل ..."
-                                        className="form-control inp-main my-2"
-                                        onBlur={formik.handleBlur}
-                                    />
-                                    {formik.touched.email && formik.errors.email ? (<span className="text-end" style={{ color: RED, fontSize: 14 }}>{formik.errors.email}</span>) : null}
+                                            }}
+                                            validationSchema={contactSchema}
+                                            onSubmit={(values) => {
+                                                onSubmitForm(values)
+                                            }}
+                                        >
+                                            <Form
+                                                className="m-2 p-4 d-flex justify-content-start flex-column"
+                                            >
+                                                <Field type="text"
+                                                    name="fullName"
+                                                    placeholder="نام و نام خانوادگی ..."
+                                                    className="form-control inp-main my-2"
+                                                />
+                                                <ErrorMessage name="fullName" render={msg => (
+                                                    <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
+                                                )} />
+                                                <Field type="number"
+                                                    name="phoneNumber"
+                                                    placeholder="شماره تماس ..."
+                                                    className="form-control inp-main my-2"
+                                                />
+                                                <ErrorMessage name="phoneNumber" render={msg => (
+                                                    <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
+                                                )} />
+                                                <Field type="email"
+                                                    name="email"
+                                                    placeholder="ادرس ایمیل ..."
+                                                    className="form-control inp-main my-2"
+                                                />
+                                                <ErrorMessage name="email" render={msg => (
+                                                    <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
+                                                )} />
 
-                                    <input type="text"
-                                        name="profession" id="profession"
-                                        value={formik.values.profession}
-                                        onChange={formik.handleChange}
-                                        placeholder="شغل ..."
-                                        onBlur={formik.handleBlur}
-                                        className="form-control inp-main my-2"
-                                    />
-                                    {formik.touched.profession && formik.errors.profession ? (<span className="text-end" style={{ color: RED, fontSize: 14 }}>{formik.errors.profession}</span>) : null}
+                                                <Field type="text"
+                                                    name="profession"
+                                                    placeholder="شغل ..."
+                                                    className="form-control inp-main my-2"
+                                                />
+                                                <ErrorMessage name="profession" render={msg => (
+                                                    <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
+                                                )} />
 
-                                    <input type="file"
-                                        id="image"
-                                        // value={formik.values.image}
-                                        // onChange={formik.handleChange}
-                                        // onBlur={formik.handleBlur}
-                                        name="image"
-                                        placeholder="ادرس ایمیل ..."
-                                        className="form-control inp-main my-2"
-                                    />
-                                    {/* {formik.touched.image && formik.errors.image ? (<span className="text-end" style={{ color: RED, fontSize: 14 }}>{formik.errors.image}</span>) : null} */}
+                                                <Field type="file"
+                                                    name="image"
+                                                    placeholder="ادرس ایمیل ..."
+                                                    className="form-control inp-main my-2"
+                                                />
+                                                <ErrorMessage name="image" render={msg => (
+                                                    <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
+                                                )} />
 
-                                    <select className="form-select inp-main my-2"
-                                        value={formik.values.group}
-                                        onChange={formik.handleChange}
-                                        name="group" id="group"
-                                        onBlur={formik.handleBlur}
-                                    >
-                                        <option value="">انتخاب گروه</option>
-                                        {groups.length > 0 && groups.map((g) => <option key={g.id} value={g.id}>{g.name}</option>)}
-                                    </select>
-                                    {formik.touched.group && formik.errors.group ? (<span className="text-end" style={{ color: RED, fontSize: 14 }}>{formik.errors.group}</span>) : null}
+                                                <Field className="form-select inp-main my-2"
+                                                    name="group"
+                                                    as="select">
+                                                    <option value="">انتخاب گروه</option>
+                                                    {groups.length > 0 && groups.map((g) => <option key={g.id}
+                                                        value={g.id}>{g.name}</option>)}
+                                                </Field>
+                                                <ErrorMessage name="group" render={msg => (
+                                                    <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
+                                                )} />
+                                                <div className=" w-100 my-2 ">
+                                                    <input type="submit"
+                                                        className="btn mx-2 mt-3 p-2 px-5"
+                                                        value='ساخت مخاطب'
+                                                        style={{ backgroundColor: ORANGE, fontSize: 18 }} />
+                                                    <Link to={"/contacts"}
+                                                        className="btn mx-2 mt-3 p-2 px-4"
+                                                        style={{ backgroundColor: COMMENT, fontSize: 18 }}
+                                                    >انصراف</Link>
+                                                </div>
+                                            </Form>
 
-                                    <div className=" w-50 my-2 ">
-                                        <input type="submit"
-                                            className="btn mx-2 mt-3"
-                                            value='ساخت مخاطب'
-                                            style={{ backgroundColor: PURPLE }} />
-                                        <Link to={"/contacts"}
-                                            className="btn mx-2 mt-3"
-                                            style={{ backgroundColor: COMMENT }}
-                                        >انصراف</Link>
+                                        </Formik>
+
                                     </div>
-                                </form>
+                                    <div className="col-0 col-sm-0 col-md-6 col-xl-6 d-flex justify-content-center flex-column me-5">
+                                        <div style={{ width: '80%' }}>
+                                            <img className="img-fluid" src={require('../../assets/images/Refer-a-Friend.png')} alt="" />
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
                     </div>

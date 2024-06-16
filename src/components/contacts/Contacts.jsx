@@ -9,7 +9,7 @@ const Contacts = () => {
     const { loading, filteredContacts, confirmDeleteContact } = useContext(ContactContext)
     return (
         <>
-            <section className="container">
+            <section className="container ">
                 <BtnAddContact />
             </section>
             {loading ? <Spinner /> : (
