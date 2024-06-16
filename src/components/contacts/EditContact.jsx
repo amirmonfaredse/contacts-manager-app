@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { ContactContext } from "../../context/contactContext";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { contactSchema } from "../../validation/contactValidation";
+import { toast } from "react-toastify";
 const EditContact = () => {
     const { loading,
         setLoading,
@@ -28,7 +29,7 @@ const EditContact = () => {
                 setContact(contactData);
                 setLoading(false)
             } catch (err) {
-                console.log(err.message);
+                toast.error("مشکلی پیش آمده است ،مجددا تلاش کنید")
                 setLoading(false)
             }
         }
@@ -47,10 +48,11 @@ const EditContact = () => {
                 setContacts(allContacts);
                 setFilteredContacts(allContacts);
                 navigate('/contacts')
+                toast.success("مخاطب با موفقیت ویرایش شد")
             }
             setLoading(false)
         } catch (err) {
-            console.log(err.message)
+            toast.error("مشکلی پیش آمده است ،مجددا تلاش کنید")
             setLoading(false)
         }
     }

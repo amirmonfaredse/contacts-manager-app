@@ -3,6 +3,7 @@ import Spinner from "../Spinner";
 import { serveGetContact, serveGetGroup } from "../../services/contactService";
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 const ViewContact = () => {
     const { contactId } = useParams()
     const [loading, setLoading] = useState(false);
@@ -18,7 +19,7 @@ const ViewContact = () => {
                 setGroup(groupData)
                 setLoading(false)
             } catch (err) {
-                console.log(err.message)
+                toast.error("مشکلی پیش آمده است ،مجددا تلاش کنید")
                 setLoading(false)
             }
         }

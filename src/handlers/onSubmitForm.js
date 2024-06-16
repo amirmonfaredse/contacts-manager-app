@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import { serveCreateContact } from "../services/contactService";
 
 const onSubmitForm = async (values,
@@ -17,9 +18,10 @@ const onSubmitForm = async (values,
             setFilteredContacts(allContacts)
             setLoading(false)
             navigate('/contacts')
+            toast.success('مخاطب با موفقیت ایجاد شد')
         }
     } catch (err) {
-        console.log(err.message);
+        toast.error('مشکلی پیش آمده است ، مجددا تلاش کنید')
         setLoading(false);
 
     }
