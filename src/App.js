@@ -74,8 +74,8 @@ const App = () => {
       onInputChange: (e) => {
         return onInputChange(e, contact, setContact);
       },
-      onSubmitForm: (e) => {
-        return onSubmitForm(e,
+      onSubmitForm: (values) => {
+        return onSubmitForm(values,
           contact,
           contacts,
           setContact,
@@ -88,7 +88,7 @@ const App = () => {
         return onDeleteContact(contactId, setLoading, setContacts)
       },
       confirmDeleteContact: (contactId, contactFullname) => {
-        return confirmDeleteContact(contactId, contactFullname, (id) => onDeleteContact(id, setContact, setLoading))
+        return confirmDeleteContact(contactId, contactFullname, (id) => onDeleteContact(id,contacts, setContact,setFilteredContacts, setLoading))
       },
       contactSearch: (query) => {
         return contactSearch(query, contacts, setFilteredContacts);

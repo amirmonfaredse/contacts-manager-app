@@ -1,12 +1,15 @@
-import { serveDeleteContact, serveGetAllContacts } from "../services/contactService";
+import { serveDeleteContact } from "../services/contactService";
 
-const onDeleteContact = async (contactId, setContacts, setLoading) => {
+const onDeleteContact = async (contactId,contacts, setContacts,setFilteredContacts, setLoading) => {
     try {
         setLoading(true)
-        const response = await serveDeleteContact(contactId);
-        if (response) {
-            const { data: contactsData } = await serveGetAllContacts()
-            setContacts(contactsData)
+        const { status} = await serveDeleteContact(contactId);
+        if (status === 200) {
+
+            setLoading(false);
+            const allContacts = contacts.filter(contact => contact.id !== contactId);
+            setContacts(allContacts)
+            setFilteredContacts(allContacts)
         }
         setLoading(false)
     }

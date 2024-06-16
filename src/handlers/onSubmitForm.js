@@ -1,6 +1,6 @@
 import { serveCreateContact } from "../services/contactService";
 
-const onSubmitForm = async (e,
+const onSubmitForm = async (values,
     contact,
     contacts,
     setContact,
@@ -8,15 +8,13 @@ const onSubmitForm = async (e,
     setFilteredContacts,
     navigate,
     setLoading,) => {
-    e.preventDefault()
     try {
-        const { status, data } = await serveCreateContact(contact);
+        const { status, data } = await serveCreateContact(values);
         if (status === 201) {
             setLoading(true);
             const allContacts = [...contacts, data];
             setContacts(allContacts)
             setFilteredContacts(allContacts)
-            setContact({});
             setLoading(false)
             navigate('/contacts')
         }
