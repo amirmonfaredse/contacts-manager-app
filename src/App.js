@@ -1,4 +1,4 @@
-import { BACKGROUND, COMMENT, CURRENTLINE, FOREGROUND, PURPLE, YELLOW } from './helpers/colors';
+import { BACKGROUND } from './helpers/colors';
 import { useState, useEffect } from 'react';
 import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { ContactContext } from './context/contactContext';
@@ -37,7 +37,6 @@ const App = () => {
   const [filteredContacts, setFilteredContacts] = useState([])
   const [groups, setGroups] = useState([])
   const [loading, setLoading] = useState(false)
-  const [contactQuery, setContactQuery] = useState({ text: "" })
   // Services
   useEffect(() => {
     const fetchData = async () => {
@@ -69,7 +68,6 @@ const App = () => {
       setContact,
       contacts,
       setContacts,
-      contactQuery,
       filteredContacts,
       setFilteredContacts,
       groups,
@@ -92,8 +90,8 @@ const App = () => {
       confirmDeleteContact: (contactId, contactFullname) => {
         return confirmDeleteContact(contactId, contactFullname, (id) => onDeleteContact(id, setContact, setLoading))
       },
-      contactSearch: (e) => {
-        return contactSearch(e, contacts, contactQuery, setContactQuery, setFilteredContacts);
+      contactSearch: (query) => {
+        return contactSearch(query, contacts, setFilteredContacts);
       }
     }}>
       <div className="App" style={{ backgroundColor: BACKGROUND }}>

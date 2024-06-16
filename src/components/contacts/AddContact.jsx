@@ -3,7 +3,28 @@ import { COMMENT, CURRENTLINE, GREEN, PURPLE, } from "../../helpers/colors";
 import { useContext } from "react";
 import { ContactContext } from "../../context/contactContext";
 import Spinner from "../Spinner";
+
+
+// Form Validation 
+import { useFormik } from "formik";
+import { contactSchema } from '../../validation/contactValidation'
 const AddContact = () => {
+    const formik = useFormik({
+        initialValues: {
+            fullName: '',
+            image: null,
+            phoneNumver: '',
+            profession: '',
+            email: '',
+            group: '',
+
+        },
+        validationSchema: contactSchema,
+        onSubmit: values => {
+            console.log(values)
+        }
+
+    })
     const { loading, onSubmitForm, onInputChange, contact, groups } = useContext(ContactContext);
     return (
         <>
@@ -16,7 +37,7 @@ const AddContact = () => {
                                     ساخت مخاطب جدید
                                 </h3>
                                 <form
-                                    onSubmit={onSubmitForm}
+                                    onSubmit={formik.handleSubmit}
                                     className="m-5 p-4 d-flex justify-content-start flex-column" style={{ backgroundColor: CURRENTLINE }}>
                                     <input type="text"
                                         name="fullName"

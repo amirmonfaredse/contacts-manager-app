@@ -3,7 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { useContext } from "react";
 import { ContactContext } from "../../context/contactContext";
 const SearchContact = () => {
-    const { contactQuery, contactSearch } = useContext(ContactContext)
+    const { contactSearch } = useContext(ContactContext)
 
     return (
         <div className="col d-flex input-group  mx-2 mt-2 " dir="ltr">
@@ -11,8 +11,7 @@ const SearchContact = () => {
                 <FaSearch />
             </span>
             <input type="text" className="form-control " dir="rtl"
-                onChange={contactSearch}
-                value={contactQuery.text}
+                onChange={e => contactSearch(e.target.value)}
                 style={{ background: BACKGROUND, borderColor: PURPLE, color: FOREGROUND }}
                 placeholder="جستجو مخاطب..."
                 aria-label="Search"
