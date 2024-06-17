@@ -10,9 +10,8 @@ const Contact = ({ contact, confirmDelete }) => {
             <div className="card m-2" style={{ backgroundColor: CURRENTLINE }}>
                 <div className="card-body px-3">
                     <div className="row align-items-center d-flex justify-content-around">
-                        <div className="col-4 col-sm-4 col-md-4 col-sm-4">
-                            {/*alt={`تصویر مخاطب ${contact.name}`}*/}
-                            <img src={require('../../assets/profiles/AmirrezaMonfared.jpg')} className="img-fluid rounded" alt="تصویر مخاطب" />
+                        <div className="col-4 col-sm-4 col-md-4 col-sm-4" >
+                            <img src={contact.image} style={{ height: '170px', width: '170px', objectFit: 'cover' }} className="img-fluid rounded" alt={`تصویر مخاطب ${contact.fullName}`} />
                         </div>
                         <div className="col-7 col-sm-7 col-md-7 col-sm-7">
                             <ul className="list-group p-0" style={{ backgroundColor: FOREGROUND }}>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { COMMENT, CURRENTLINE, CYAN, GREEN, ORANGE, PURPLE, RED, YELLOW } from "../../helpers/colors";
+import { COMMENT, CURRENTLINE, GREEN, ORANGE,  RED  } from "../../helpers/colors";
 import { useContext } from "react";
 import { ContactContext } from "../../context/contactContext";
 import Spinner from "../Spinner";
@@ -27,7 +27,7 @@ const AddContact = () => {
                                         <Formik
                                             initialValues={{
                                                 fullName: '',
-                                                // image: null,
+                                                image: '',
                                                 phoneNumber: '',
                                                 profession: '',
                                                 email: '',
@@ -76,9 +76,9 @@ const AddContact = () => {
                                                     <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
                                                 )} />
 
-                                                <Field type="file"
+                                                <Field type="text"
                                                     name="image"
-                                                    placeholder="ادرس ایمیل ..."
+                                                    placeholder="ادرس تصویر ..."
                                                     className="form-control inp-main my-2"
                                                 />
                                                 <ErrorMessage name="image" render={msg => (

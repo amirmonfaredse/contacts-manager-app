@@ -19,7 +19,7 @@ const ViewContact = () => {
                 setGroup(groupData)
                 setLoading(false)
             } catch (err) {
-                toast.error("مشکلی پیش آمده است ،مجددا تلاش کنید")
+                toast.error("برای دریافت اطلاعات مخاطب مشکلی پیش آمده ، مجددا تلاش کنید")
                 setLoading(false)
             }
         }
@@ -43,7 +43,7 @@ const ViewContact = () => {
                                     <div className="row my-3">
                                         <div className="col d-flex pe-0" style={{ backgroundColor: CURRENTLINE }}>
                                             <div className="w-25">
-                                                <img className="img-fluid" src={require("../../assets/profiles/AmirrezaMonfared.jpg")} alt='تصویرمخاطب' />
+                                                <img className="img-fluid" src={contact.image} style={{ height: '300px', width: '330px', objectFit: 'cover' }} alt={`نصویر مخاطب${contact.fullName}`} />
                                             </div>
                                             <div className="w-75  my-5">
                                                 <ul className="list-group">

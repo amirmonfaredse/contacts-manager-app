@@ -47,7 +47,7 @@ const App = () => {
 
         setLoading(false)
       } catch (err) {
-        toast.error("مشکلی پیش آمده است ، مجددا تلاش کنید")
+        toast.error(" دریافت مخاطبین از سرور به مشکل خورده است مجددا تلاش کنید")
         setLoading(false)
       }
     }

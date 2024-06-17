@@ -16,7 +16,7 @@ const onDeleteContact = async (contactId, contacts, setContacts, setFilteredCont
         setLoading(false)
     }
     catch (err) {
-        toast.error("مشکلی پیش آمده است ،مجددا تلاش کنید")
+        toast.error("حذف کردن مخاطب انجام نشد ، مجددا تلاش کنید")
         setLoading(false);
     }
 }

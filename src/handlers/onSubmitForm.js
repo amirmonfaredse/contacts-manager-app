@@ -21,7 +21,7 @@ const onSubmitForm = async (values,
             toast.success('مخاطب با موفقیت ایجاد شد')
         }
     } catch (err) {
-        toast.error('مشکلی پیش آمده است ، مجددا تلاش کنید')
+        toast.error('مخاطب ایجاد نشد ، مجددا تلاش کنید')
         setLoading(false);
 
     }

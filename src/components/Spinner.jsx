@@ -1,7 +1,6 @@
 const Spinner = () => {
     return (
         <>
-            <xml version="1.0" encoding="utf-8" />
             <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
                 style={{
                     margin: "auto",

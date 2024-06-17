@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { COMMENT, CURRENTLINE, GREEN, ORANGE, PURPLE, RED, } from "../../helpers/colors";
+import { COMMENT, CURRENTLINE, GREEN, ORANGE, RED, } from "../../helpers/colors";
 import { useEffect } from "react";
 import { serveEditContact, serveGetContact } from "../../services/contactService";
 import Spinner from "../Spinner";
@@ -27,9 +27,10 @@ const EditContact = () => {
                 setLoading(true);
                 const { data: contactData } = await serveGetContact(contactId);
                 setContact(contactData);
+
                 setLoading(false)
             } catch (err) {
-                toast.error("مشکلی پیش آمده است ،مجددا تلاش کنید")
+                toast.error("مخاطب ویرایش نشد مجددا تلاش کنید")
                 setLoading(false)
             }
         }
@@ -115,9 +116,9 @@ const EditContact = () => {
                                                         <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>
                                                     )} />
 
-                                                    <Field type="file"
+                                                    <Field type="text"
                                                         name="image"
-                                                        placeholder="ادرس ایمیل ..."
+                                                        placeholder="ادرس تصویر ..."
                                                         className="form-control inp-main my-2"
                                                     />
                                                     <ErrorMessage name="image" render={msg => (
