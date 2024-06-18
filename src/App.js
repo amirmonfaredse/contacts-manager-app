@@ -1,19 +1,23 @@
 import { BACKGROUND } from './helpers/colors';
 import { useState, useEffect } from 'react';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import { ContactContext } from './context/contactContext';
 
 import { ToastContainer, toast } from 'react-toastify';
 // Contact Components
-import * as components from './components'
+import {
+  Navbar,
+  Contacts,
+  AddContact,
+  EditContact,
+  ViewContact,
+} from './components'
 
 // CSS
 import './App.css';
 
 // Services
 import {
-  serveCreateContact,
-  serveDeleteContact,
   serveGetAllContacts,
   serveGetAllGroups
 } from "./services/contactService"
@@ -24,9 +28,11 @@ import {
   onDeleteContact,
   confirmDeleteContact, contactSearch
 } from "./handlers"
+import onSubmitFormUpdate from './handlers/onSubmitFormUpdate';
 
 const App = () => {
   const navigate = useNavigate()
+  const { contactId } = useParams()
   // Contacts States
   const [contact, setContact] = useState({})
   const [contacts, setContacts] = useState([])
@@ -80,6 +86,13 @@ const App = () => {
           navigate,
           setLoading,)
       },
+      onSubmitFormUpdate: (values) => {
+        return onSubmitFormUpdate(values, setLoading,
+          contacts,
+          setContacts,
+          setFilteredContacts,
+          contactId, navigate)
+      },
       onDeleteContact: (contactId) => {
         return onDeleteContact(contactId, setLoading, setContacts)
       },
@@ -91,14 +104,14 @@ const App = () => {
       }
     }}>
       <div className="App" style={{ backgroundColor: BACKGROUND }}>
-        <components.Navbar />
+        <Navbar />
         <ToastContainer rtl={true} theme="colored" />
         <Routes>
           <Route path='/' element={<Navigate to="/contacts" />} />
-          <Route path='/contacts' element={<components.Contacts />} />
-          <Route path='/contacts/add' element={<components.AddContact />} />
-          <Route path='/contacts/edit/:contactId' element={<components.EditContact />} />
-          <Route path='/contacts/:contactId' element={<components.ViewContact />} />
+          <Route path='/contacts' element={<Contacts />} />
+          <Route path='/contacts/add' element={<AddContact />} />
+          <Route path='/contacts/edit/:contactId' element={<EditContact />} />
+          <Route path='/contacts/:contactId' element={<ViewContact />} />
         </Routes>
       </div>
     </ContactContext.Provider >

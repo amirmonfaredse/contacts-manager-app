@@ -1,8 +1,6 @@
-import Contact from './Contact'
-import Spinner from '../Spinner'
+import {Spinner ,Contact ,BtnAddContact} from '../index'
 import { CURRENTLINE, ORANGE } from '../../helpers/colors';
 
-import BtnAddContact from './BtnAddContact';
 import { useContext } from 'react';
 import { ContactContext } from '../../context/contactContext';
 const Contacts = () => {

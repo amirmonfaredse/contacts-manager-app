@@ -1,5 +1,5 @@
 import { CURRENTLINE, GREEN, PINK } from "../../helpers/colors";
-import Spinner from "../Spinner";
+import { Spinner } from "../index";
 import { serveGetContact, serveGetGroup } from "../../services/contactService";
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react";

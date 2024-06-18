@@ -5,7 +5,7 @@
       "phoneNumber": 9125698741,
       "profession": "باریستا و بارتندر",
       "email": "mehrdad@mogh.com",
-      "group": "3",
+      "group": "2",
       "id": 23,
       "image": "https://iili.io/d98SvrF.png"
     },
@@ -37,22 +37,13 @@
       "id": 26
     },
     {
-      "fullName": "هستی محمدیان",
+      "fullName": "هستی محمدیان فرد",
       "phoneNumber": 9125634785,
       "profession": "آرایشگر",
       "email": "hastimakeup@gmail.com",
-      "group": "2",
+      "group": "3",
       "image": "https://iili.io/d986QJ1.webp",
       "id": 27
-    },
-    {
-      "fullName": "نیاز مقدم",
-      "image": "https://iili.io/d98tD3x.webp",
-      "phoneNumber": 9132569847,
-      "profession": "مربی بدنسازی",
-      "email": "gymneiyaz@gmail.com",
-      "group": "2",
-      "id": 28
     }
   ],
   "groups": [
