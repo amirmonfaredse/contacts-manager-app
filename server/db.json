@@ -1,15 +1,6 @@
 {
   "contacts": [
     {
-      "fullName": "مهرداد مقدم",
-      "phoneNumber": 9125698741,
-      "profession": "باریستا و بارتندر",
-      "email": "mehrdad@mogh.com",
-      "group": "2",
-      "id": 23,
-      "image": "https://iili.io/d98SvrF.png"
-    },
-    {
       "fullName": "یاسر نیازمند",
       "phoneNumber": 9131452668,
       "profession": "مدرس زبان",
@@ -20,7 +11,7 @@
     },
     {
       "fullName": "حمید جان پناه",
-      "phoneNumber": 9145396487,
+      "phoneNumber": 1979879494,
       "profession": "حسابدار",
       "email": "hamid@personal.com",
       "group": "1",
