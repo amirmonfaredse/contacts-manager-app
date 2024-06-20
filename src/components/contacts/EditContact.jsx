@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { CURRENTLINE, GREEN, } from "../../helpers/colors";
-import { useEffect ,useContext } from "react";
+import { useEffect, useContext } from "react";
 import { serveEditContact, serveGetContact } from "../../services/contactService";
 
 import { ContactContext } from "../../context/contactContext";
@@ -8,6 +8,7 @@ import { VectorImgForForms, OriginalForm, Spinner } from "../index";
 
 
 import { toast } from "react-toastify";
+
 const EditContact = () => {
     const { loading,
         setLoading,
@@ -56,7 +57,7 @@ const EditContact = () => {
             setLoading(false)
         }
     }
-
+    
     return (
         <>
             {loading ? <Spinner /> :

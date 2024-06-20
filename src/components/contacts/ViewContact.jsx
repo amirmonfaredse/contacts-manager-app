@@ -4,6 +4,9 @@ import { serveGetContact, serveGetGroup } from "../../services/contactService";
 import { useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { IoPerson } from "react-icons/io5";
+import { FaPhoneFlip, FaUserGroup } from "react-icons/fa6";
+import { MdEmail, MdWork } from "react-icons/md";
 const ViewContact = () => {
     const { contactId } = useParams()
     const [loading, setLoading] = useState(false);
@@ -46,35 +49,36 @@ const ViewContact = () => {
                                                 <img className="img-fluid" src={contact.image} style={{ height: '300px', width: '330px', objectFit: 'cover' }} alt={`نصویر مخاطب${contact.fullName}`} />
                                             </div>
                                             <div className="w-75  my-5">
-                                                <ul className="list-group">
+                                                <ul className="list-group text-end ">
                                                     <li className="list-group-item">
-                                                        نام و نام خانوادگی :
-                                                        <span className="fw-bold">
+                                                        <IoPerson className="ms-2"/> نام و نام خانوادگی :
+                                                        <span className="fw-bold me-2">
                                                             {contact.fullName}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        شماره تلفن :
-                                                        <span className="fw-bold">
+                                                        <FaPhoneFlip className="ms-2"/>شماره تلفن :
+                                                        <span className="fw-bold me-2">
                                                             {contact.phoneNumber}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        ایمیل :
-                                                        <span className="fw-bold">
+                                                    <MdEmail className="ms-2"/>
+                                                    ایمیل :
+                                                        <span className="fw-bold me-2">
                                                             {contact.email}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        شغل :
-                                                        <span className="fw-bold">
+                                                    <MdWork className="ms-2"/>شغل :
+                                                        <span className="fw-bold me-2">
                                                             {contact.profession}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        نام و نام خانوادگی :
-                                                        <span className="fw-bold">
-                                                            {contact.fullName}
+                                                    <FaUserGroup className="ms-2" />گروه :
+                                                        <span className="fw-bold me-2">
+                                                            {contact.group}
                                                         </span>
                                                     </li>
                                                 </ul>

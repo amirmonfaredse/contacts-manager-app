@@ -1,5 +1,6 @@
 import { confirmAlert } from "react-confirm-alert";
-import { COMMENT, CURRENTLINE, FOREGROUND, PURPLE, YELLOW } from "../helpers/colors";
+import {  COMMENT, CURRENTLINE, FOREGROUND, PURPLE, YELLOW } from "../helpers/colors";
+import { FaCheck } from "react-icons/fa6";
 
 const confirmDeleteContact = (contactId, contactFullname, onDeleteContact) => {
     confirmAlert({
@@ -20,7 +21,7 @@ const confirmDeleteContact = (contactId, contactFullname, onDeleteContact) => {
                         onClick={() => {
                             onDeleteContact(contactId);
                             onClose()
-                        }}>مطمئن هستم
+                        }}>مطمئن هستم<FaCheck  />
                     </button>
                     <button onClick={onClose}
                         className='btn'

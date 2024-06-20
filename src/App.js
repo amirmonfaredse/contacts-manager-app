@@ -28,11 +28,9 @@ import {
   onDeleteContact,
   confirmDeleteContact, contactSearch
 } from "./handlers"
-import onSubmitFormUpdate from './handlers/onSubmitFormUpdate';
 
 const App = () => {
   const navigate = useNavigate()
-  const { contactId } = useParams()
   // Contacts States
   const [contact, setContact] = useState({})
   const [contacts, setContacts] = useState([])
@@ -85,13 +83,6 @@ const App = () => {
           setFilteredContacts,
           navigate,
           setLoading,)
-      },
-      onSubmitFormUpdate: (values) => {
-        return onSubmitFormUpdate(values, setLoading,
-          contacts,
-          setContacts,
-          setFilteredContacts,
-          contactId, navigate)
       },
       onDeleteContact: (contactId) => {
         return onDeleteContact(contactId, setLoading, setContacts)
