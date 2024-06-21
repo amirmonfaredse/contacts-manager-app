@@ -1,19 +1,19 @@
 
 import { CURRENTLINE, GREEN } from "../../helpers/colors";
-import { useContext } from "react";
+import { Suspense, useContext } from "react";
 import { ContactContext } from "../../context/contactContext";
 import {
-    Spinner, 
+    Spinner,
     VectorImgForForms,
     OriginalForm,
 } from "../index";
 
 const AddContact = () => {
-    const { loading, onSubmitForm, groups } = useContext(ContactContext);
+    const { onSubmitForm, groups } = useContext(ContactContext);
 
     return (
         <>
-            {loading ? <Spinner /> : (
+            <Suspense fallback={<Spinner />}>
                 <div className="container" >
                     <div className="grid">
                         <div className="row  text-center">
@@ -32,8 +32,7 @@ const AddContact = () => {
                         </div>
                     </div>
                 </div>
-            )
-            }
+            </Suspense>
         </>
     )
 }

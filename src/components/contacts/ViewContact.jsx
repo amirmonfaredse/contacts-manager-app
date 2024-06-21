@@ -51,32 +51,32 @@ const ViewContact = () => {
                                             <div className="w-75  my-5">
                                                 <ul className="list-group text-end ">
                                                     <li className="list-group-item">
-                                                        <IoPerson className="ms-2"/> نام و نام خانوادگی :
+                                                        <IoPerson className="ms-2" /> نام و نام خانوادگی :
                                                         <span className="fw-bold me-2">
                                                             {contact.fullName}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                        <FaPhoneFlip className="ms-2"/>شماره تلفن :
+                                                        <FaPhoneFlip className="ms-2" />شماره تلفن :
                                                         <span className="fw-bold me-2">
                                                             {contact.phoneNumber}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                    <MdEmail className="ms-2"/>
-                                                    ایمیل :
+                                                        <MdEmail className="ms-2" />
+                                                        ایمیل :
                                                         <span className="fw-bold me-2">
                                                             {contact.email}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                    <MdWork className="ms-2"/>شغل :
+                                                        <MdWork className="ms-2" />شغل :
                                                         <span className="fw-bold me-2">
                                                             {contact.profession}
                                                         </span>
                                                     </li>
                                                     <li className="list-group-item">
-                                                    <FaUserGroup className="ms-2" />گروه :
+                                                        <FaUserGroup className="ms-2" />گروه :
                                                         <span className="fw-bold me-2">
                                                             {contact.group}
                                                         </span>

@@ -1,6 +1,6 @@
 import { BACKGROUND } from './helpers/colors';
 import { useState, useEffect } from 'react';
-import { Navigate, Route, Routes, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 import { ContactContext } from './context/contactContext';
 
 import { ToastContainer, toast } from 'react-toastify';
@@ -58,7 +58,6 @@ const App = () => {
 
     fetchData()
   }, [])
-
 
   return (
     <ContactContext.Provider value={{

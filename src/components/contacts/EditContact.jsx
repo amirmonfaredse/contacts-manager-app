@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { CURRENTLINE, GREEN, } from "../../helpers/colors";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, Suspense } from "react";
 import { serveEditContact, serveGetContact } from "../../services/contactService";
 
 import { ContactContext } from "../../context/contactContext";
@@ -10,8 +10,7 @@ import { VectorImgForForms, OriginalForm, Spinner } from "../index";
 import { toast } from "react-toastify";
 
 const EditContact = () => {
-    const { loading,
-        setLoading,
+    const { setLoading,
         contacts,
         setContacts,
         contact,
@@ -57,30 +56,29 @@ const EditContact = () => {
             setLoading(false)
         }
     }
-    
+
     return (
         <>
-            {loading ? <Spinner /> :
-                (
-                    <div className="container" >
-                        <div className="grid">
-                            <div className="row  text-center">
-                                <div className="col rounded" >
-                                    <h3 className="h3 p-3" style={{ color: GREEN }}>
-                                        ویرایش مخاطب
-                                    </h3>
-                                    <div className="container d-flex" style={{ backgroundColor: CURRENTLINE, borderRadius: 10 }}
-                                    >
-                                        <div className="col-12 col-sm-12 col-md-6 col-xl-6">
-                                            <OriginalForm onSubmitForm={onSubmitUpdate} groups={groups} contact={contact} />
-                                        </div>
-                                        <VectorImgForForms />
+            <Suspense fallback={<Spinner />}>
+                <div className="container" >
+                    <div className="grid">
+                        <div className="row  text-center">
+                            <div className="col rounded" >
+                                <h3 className="h3 p-3" style={{ color: GREEN }}>
+                                    ویرایش مخاطب
+                                </h3>
+                                <div className="container d-flex" style={{ backgroundColor: CURRENTLINE, borderRadius: 10 }}
+                                >
+                                    <div className="col-12 col-sm-12 col-md-6 col-xl-6">
+                                        <OriginalForm onSubmitForm={onSubmitUpdate} groups={groups} contact={contact} />
                                     </div>
+                                    <VectorImgForForms />
                                 </div>
                             </div>
                         </div>
                     </div>
-                )}
+                </div>
+            </Suspense>
         </>
     )
 }
