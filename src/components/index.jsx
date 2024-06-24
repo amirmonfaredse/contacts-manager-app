@@ -8,7 +8,7 @@ export { default as Contact } from './contacts/Contact';
 export { default as SearchContact } from './contacts/SearchContact';
 export { default as OriginalForm } from './contacts/OriginalForm'
 // Other Components
-export { default as BtnAddContact } from './statelesses/BtnAddContact'
-export { default as Navbar } from './statelesses/Navbar';
-export { default as Spinner } from './statelesses/Spinner';
-export { default as VectorImgForForms } from './statelesses/VectorImgForForms';
+export { default as BtnAddContact } from './uiContainers/BtnAddContact'
+export { default as Navbar } from './uiContainers/Navbar';
+export { default as Spinner } from './uiContainers/Spinner';
+export { default as VectorImgForForms } from './uiContainers/VectorImgForForms';

@@ -37,6 +37,10 @@ const App = () => {
   const [filteredContacts, setFilteredContacts] = useState([])
   const [groups, setGroups] = useState([])
   const [loading, setLoading] = useState(false)
+
+
+
+  
   // Services
   useEffect(() => {
     const fetchData = async () => {

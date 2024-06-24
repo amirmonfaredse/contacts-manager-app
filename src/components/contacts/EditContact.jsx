@@ -8,8 +8,11 @@ import { VectorImgForForms, OriginalForm, Spinner } from "../index";
 
 
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const EditContact = () => {
+
+
     const { setLoading,
         contacts,
         setContacts,
@@ -19,14 +22,14 @@ const EditContact = () => {
         groups, } = useContext(ContactContext);
     const { contactId } = useParams()
     const navigate = useNavigate()
-
     useEffect(() => {
+
+
         const fetchData = async () => {
             try {
                 setLoading(true);
                 const { data: contactData } = await serveGetContact(contactId);
                 setContact(contactData);
-
                 setLoading(false)
             } catch (err) {
                 toast.error("مخاطب ویرایش نشد مجددا تلاش کنید")
@@ -34,7 +37,7 @@ const EditContact = () => {
             }
         }
         fetchData()
-    }, [])
+    }, [contactId, setLoading, setContact])
     const onSubmitUpdate = async (values) => {
         try {
             setLoading(true)
@@ -59,10 +62,13 @@ const EditContact = () => {
 
     return (
         <>
+            <Helmet>
+                <title>ویرایش مخاطب</title>
+            </Helmet>
             <Suspense fallback={<Spinner />}>
                 <div className="container" >
                     <div className="grid">
-                        <div className="row  text-center">
+                        <div className="row text-center">
                             <div className="col rounded" >
                                 <h3 className="h3 p-3" style={{ color: GREEN }}>
                                     ویرایش مخاطب

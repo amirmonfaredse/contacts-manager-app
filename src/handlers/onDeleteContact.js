@@ -6,7 +6,6 @@ const onDeleteContact = async (contactId, contacts, setContacts, setFilteredCont
         setLoading(true)
         const { status } = await serveDeleteContact(contactId);
         if (status === 200) {
-
             setLoading(false);
             const allContacts = contacts.filter(contact => contact.id !== contactId);
             setContacts(allContacts)

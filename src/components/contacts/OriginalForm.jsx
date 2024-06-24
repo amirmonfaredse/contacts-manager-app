@@ -2,9 +2,13 @@ import { Link } from "react-router-dom";
 import { COMMENT, ORANGE, RED } from "../../helpers/colors";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { contactSchema } from '../../validation/contactValidation'
-
+import { useEffect, useRef } from "react";
 const OriginalForm = ({ onSubmitForm, groups, contact }) => {
-    const initalValues = contact ? contact : {
+    const inputRef = useRef(null)
+    useEffect(() => {
+        inputRef.current.focus();
+    }, [])
+    const initialValues = contact || {
         fullName: '',
         image: '',
         phoneNumber: '',
@@ -12,14 +16,16 @@ const OriginalForm = ({ onSubmitForm, groups, contact }) => {
         email: '',
         group: '',
     }
+
     return (
         <>
             <Formik
-                initialValues={initalValues}
+                initialValues={initialValues}
                 validationSchema={contactSchema}
                 onSubmit={(values) => {
                     onSubmitForm(values)
                 }}
+                enableReinitialize
             >
                 <Form
                     className="m-2 p-4 d-flex justify-content-start flex-column"
@@ -28,6 +34,7 @@ const OriginalForm = ({ onSubmitForm, groups, contact }) => {
                         name="fullName"
                         placeholder="نام و نام خانوادگی ..."
                         className="form-control inp-main my-2"
+                        innerRef={inputRef}
                     />
                     <ErrorMessage name="fullName" render={msg => (
                         <span className="text-end" style={{ color: RED, fontSize: 14 }}>{msg}</span>

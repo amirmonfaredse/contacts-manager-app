@@ -7,12 +7,16 @@ import {
     VectorImgForForms,
     OriginalForm,
 } from "../index";
+import { Helmet } from "react-helmet-async";
 
 const AddContact = () => {
     const { onSubmitForm, groups } = useContext(ContactContext);
-
+    
     return (
         <>
+            <Helmet>
+                <title>اضافه کردن مخاطب</title>
+            </Helmet>
             <Suspense fallback={<Spinner />}>
                 <div className="container" >
                     <div className="grid">

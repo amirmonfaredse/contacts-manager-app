@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { IoPerson } from "react-icons/io5";
 import { FaPhoneFlip, FaUserGroup } from "react-icons/fa6";
 import { MdEmail, MdWork } from "react-icons/md";
+import { Helmet } from "react-helmet-async";
 const ViewContact = () => {
     const { contactId } = useParams()
     const [loading, setLoading] = useState(false);
@@ -30,6 +31,9 @@ const ViewContact = () => {
     }, [])
     return (
         <>
+            <Helmet>
+                <title>مشاهده مخاطب</title>
+            </Helmet>
             <section className="view-contact-intro p3">
                 <div className="container">
 
