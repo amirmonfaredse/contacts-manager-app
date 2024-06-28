@@ -8,10 +8,11 @@ import {
     OriginalForm,
 } from "../index";
 import { Helmet } from "react-helmet-async";
+import useSubmitContactHandlers from "../../hooks/useContactsHandlers";
 
 const AddContact = () => {
-    const { onSubmitForm, groups } = useContext(ContactContext);
-    
+    const { groups } = useContext(ContactContext);
+    const { onSubmitForm } = useSubmitContactHandlers();
     return (
         <>
             <Helmet>

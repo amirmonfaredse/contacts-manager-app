@@ -3,8 +3,10 @@ import { Spinner, Contact, BtnAddContact } from '../index'
 import { Suspense, useContext } from 'react';
 import { ContactContext } from '../../context/contactContext';
 import ErrorNotFound from '../errors/ErrorNotFound';
+import useDeleteContact from '../../hooks/useDeleteContact';
 const Contacts = () => {
-    const { filteredContacts, confirmDeleteContact } = useContext(ContactContext)
+    const { filteredContacts } = useContext(ContactContext)
+    const confirmDeleteContact = useDeleteContact()
     return (
         <>
             <section className="container ">

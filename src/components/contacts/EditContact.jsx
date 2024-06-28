@@ -9,22 +9,17 @@ import { VectorImgForForms, OriginalForm, Spinner } from "../index";
 
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useSubmitContactHandlers from "../../hooks/useContactsHandlers";
 
 const EditContact = () => {
-
-
-    const { setLoading,
-        contacts,
-        setContacts,
+    const { onSubmitUpdate } = useSubmitContactHandlers()
+    const { contactId } = useParams()
+    const {
+        setLoading,
         contact,
         setContact,
-        setFilteredContacts,
         groups, } = useContext(ContactContext);
-    const { contactId } = useParams()
-    const navigate = useNavigate()
     useEffect(() => {
-
-
         const fetchData = async () => {
             try {
                 setLoading(true);
@@ -38,27 +33,6 @@ const EditContact = () => {
         }
         fetchData()
     }, [contactId, setLoading, setContact])
-    const onSubmitUpdate = async (values) => {
-        try {
-            setLoading(true)
-            const { data, status } = await serveEditContact(values, contactId)
-            if (status === 200) {
-                const allContacts = [...contacts];
-                const contactIndex = allContacts.findIndex(
-                    c => c.id === parseInt(contactId)
-                )
-                allContacts[contactIndex] = { ...data };
-                setContacts(allContacts);
-                setFilteredContacts(allContacts);
-                navigate('/contacts')
-                toast.success("مخاطب با موفقیت ویرایش شد")
-            }
-            setLoading(false)
-        } catch (err) {
-            toast.error("مشکلی پیش آمده است ،مجددا تلاش کنید")
-            setLoading(false)
-        }
-    }
 
     return (
         <>

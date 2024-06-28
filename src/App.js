@@ -21,13 +21,6 @@ import {
   serveGetAllContacts,
   serveGetAllGroups
 } from "./services/contactService"
-// Import Handlers
-import {
-  onSubmitForm,
-  onInputChange,
-  onDeleteContact,
-  confirmDeleteContact, contactSearch
-} from "./handlers"
 
 const App = () => {
   const navigate = useNavigate()
@@ -40,7 +33,7 @@ const App = () => {
 
 
 
-  
+
   // Services
   useEffect(() => {
     const fetchData = async () => {
@@ -74,28 +67,7 @@ const App = () => {
       filteredContacts,
       setFilteredContacts,
       groups,
-      onInputChange: (e) => {
-        return onInputChange(e, contact, setContact);
-      },
-      onSubmitForm: (values) => {
-        return onSubmitForm(values,
-          contact,
-          contacts,
-          setContact,
-          setContacts,
-          setFilteredContacts,
-          navigate,
-          setLoading,)
-      },
-      onDeleteContact: (contactId) => {
-        return onDeleteContact(contactId, setLoading, setContacts)
-      },
-      confirmDeleteContact: (contactId, contactFullname) => {
-        return confirmDeleteContact(contactId, contactFullname, (id) => onDeleteContact(id, contacts, setContact, setFilteredContacts, setLoading))
-      },
-      contactSearch: (query) => {
-        return contactSearch(query, contacts, setFilteredContacts);
-      }
+      navigate,
     }}>
       <div className="App" style={{ backgroundColor: BACKGROUND }}>
         <Navbar />

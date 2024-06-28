@@ -1,10 +1,9 @@
 import { BACKGROUND, FOREGROUND, PURPLE } from "../../helpers/colors"
 import { FaSearch } from "react-icons/fa";
-import { useContext } from "react";
-import { ContactContext } from "../../context/contactContext";
-const SearchContact = () => {
-    const { contactSearch } = useContext(ContactContext)
 
+import useInputChange from "../../hooks/useInputChange";
+const SearchContact = () => {
+    const contactSearch = useInputChange()
     return (
         <div className="col d-flex input-group  mx-2 mt-2 " dir="ltr">
             <span className="input-group-text " id="basic-addon1" style={{ background: PURPLE, borderColor: PURPLE }}>
