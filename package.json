@@ -23,7 +23,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "predeploy": "react-scripts build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "concurrently \"react-scripts start\" \"cd server && npm start\"",
     "build": "react-scripts build",
