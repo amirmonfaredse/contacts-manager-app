@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/contacts-manager-app/static/css/main.d012e4a2.css",
+    "main.js": "/contacts-manager-app/static/js/main.2ecb0a9b.js",
+    "static/media/Connection Error.gif": "/contacts-manager-app/static/media/Connection Error.47f6927b4a28f11e7e0e.gif",
+    "static/media/Refer-a-Friend.png": "/contacts-manager-app/static/media/Refer-a-Friend.5e11113ba1a1cd1ae270.png",
+    "index.html": "/contacts-manager-app/index.html",
+    "main.d012e4a2.css.map": "/contacts-manager-app/static/css/main.d012e4a2.css.map",
+    "main.2ecb0a9b.js.map": "/contacts-manager-app/static/js/main.2ecb0a9b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d012e4a2.css",
+    "static/js/main.2ecb0a9b.js"
+  ]
+}
