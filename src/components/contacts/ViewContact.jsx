@@ -28,7 +28,7 @@ const ViewContact = () => {
             }
         }
         fetchData()
-    }, [])
+    }, [contactId])
     return (
         <>
             <Helmet>

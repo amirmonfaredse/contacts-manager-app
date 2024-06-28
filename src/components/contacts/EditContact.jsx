@@ -1,7 +1,7 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { CURRENTLINE, GREEN, } from "../../helpers/colors";
 import { useEffect, useContext, Suspense } from "react";
-import { serveEditContact, serveGetContact } from "../../services/contactService";
+import { serveGetContact } from "../../services/contactService";
 
 import { ContactContext } from "../../context/contactContext";
 import { VectorImgForForms, OriginalForm, Spinner } from "../index";

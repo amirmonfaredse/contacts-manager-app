@@ -5,8 +5,7 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
 const useSubmitContactHandlers = () => {
-    const { contact,
-        setContact,
+    const {
         contacts,
         setContacts,
         setFilteredContacts,
